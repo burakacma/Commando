@@ -182,10 +182,10 @@ class Argument {
 
 			// Prompt the user for a new value
 			prompts.push(await msg.reply(stripIndents`
-				${empty ? this.prompt : valid ? valid : `You provided an invalid ${this.label}. Please try again.`}
+				${empty ? this.prompt : valid ? valid : `Hatalı ${this.label} kullandınız. Lütfen tekrar deneyin.`}
 				${oneLine`
-					Respond with \`cancel\` to cancel the command.
-					${wait ? `The command will automatically be cancelled in ${this.wait} seconds.` : ''}
+					Komutu \`cancel\` yazarak iptal edebilirsiniz.
+					${wait ? `Komut ${this.wait} saniye içerisinde otomatik olarak iptal edilecek.` : ''}
 				`}
 			`));
 
@@ -268,21 +268,21 @@ class Argument {
 					const escaped = escapeMarkdown(val).replace(/@/g, '@\u200b');
 					prompts.push(await msg.reply(stripIndents`
 						${valid ? valid : oneLine`
-							You provided an invalid ${this.label},
+							Hatalı ${this.label} kullanımı,
 							"${escaped.length < 1850 ? escaped : '[too long to show]'}".
-							Please try again.
+							Lütfen tekrar deneyin.
 						`}
 						${oneLine`
-							Respond with \`cancel\` to cancel the command, or \`finish\` to finish entry up to this point.
-							${wait ? `The command will automatically be cancelled in ${this.wait} seconds.` : ''}
+							Komutu \`cancel\` yazarak iptal edebilirsiniz veya \`finish\` yazarak tüm prosedürü sonlandırabilirsiniz.
+							${wait ? `Komut ${this.wait} saniye içerisinde otomatik olarak iptal edilecek.` : ''}
 						`}
 					`));
 				} else if(results.length === 0) {
 					prompts.push(await msg.reply(stripIndents`
 						${this.prompt}
 						${oneLine`
-							Respond with \`cancel\` to cancel the command, or \`finish\` to finish entry.
-							${wait ? `The command will automatically be cancelled in ${this.wait} seconds, unless you respond.` : ''}
+							Komutu \`cancel\` yazarak iptal edebilirsiniz veya \`finish\` yazarak tüm prosedürü sonlandırabilirsiniz.
+							${wait ? `Komut ${this.wait} saniye içerisinde otomatik olarak iptal edilecek.` : ''}
 						`}
 					`));
 				}
